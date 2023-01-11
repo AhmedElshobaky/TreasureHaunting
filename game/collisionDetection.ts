@@ -18,10 +18,10 @@ import {coinAudioLoader, heartAudioLoader, rockAudioLoader } from './audio';
 export const detectCollisions = () => {
     // If the level is over, don't detect collisions
     if (sceneConfiguration.levelOver) return;
-    // Using the dimensions of our rocket, create a box that is the width and height of our model
+    // Using the dimensions of our boat, create a box that is the width and height of our model
     // This box doesn't appear in the world, it's merely a set of coordinates that describe the box
     // in world space.
-    const rocketBox = new Box3().setFromObject(boatModel);
+    const boatBox = new Box3().setFromObject(boatModel);
     // For every challange row that we have on the screen...
     challengeRows.forEach(x => {
         // ...update the global position matrix of the row, and its children.
@@ -31,16 +31,16 @@ export const detectCollisions = () => {
             y.children.forEach(z => {
                 // ...create a box that is the width and height of the object
                 const box = new Box3().setFromObject(z);
-                // Check if the box with the obstacle overlaps (or intersects with) our rocket
-                if (box.intersectsBox(rocketBox)) {
+                // Check if the box with the obstacle overlaps (or intersects with) our boat
+                if (box.intersectsBox(boatBox)) {
                     // If it does, get the center position of that box
                     let destructionPosition = box.getCenter(z.position);
-                    // Queue up the destruction animation to play (the boxes flying out from the rocket)
+                    // Queue up the destruction animation to play (the boxes flying out from the boat)
                     playDestructionAnimation(destructionPosition);
                     // Remove the object that has been hit from the parent
                     // This removes the object from the scene
                     y.remove(z);
-                    // Now, we check what it was that we hit, whether it was a rock, shield, or crystal
+                    // Now, we check what it was that we hit, whether it was a rock, shield, or coin
                     if (y.userData.objectType !== undefined) {
                         let type = y.userData.objectType as ObjectType;
                         switch (type) {
@@ -71,14 +71,14 @@ export const detectCollisions = () => {
                                     endLevel(true);
                                 }
                                 break;
-                            // If it's a crystal...
+                            // If it's a coin...
                             case ObjectType.COIN:
                                 // ...play the coin sound
                                 if(sceneConfiguration.soundEnabled){
                                 coinAudioLoader();
                                 }
-                                // Update the UI with the new count of crystals, and increment the count of
-                                // currently collected crystals
+                                // Update the UI with the new count of coins, and increment the count of
+                                // currently collected coins
                                 coinUiElement.innerText = String(++sceneConfiguration.data.coinsCollected);
                                 break;
                             // If it's a shield...
@@ -118,7 +118,7 @@ const playDestructionAnimation = (spawnPosition: Vector3) => {
         // Create an animation mixer for the object
         destructionBit.userData.mixer = new AnimationMixer(destructionBit);
 
-        // Spawn the objects in a circle around the rocket
+        // Spawn the objects in a circle around the boat
         let degrees = i / 45;
 
         // Work out where on the circle we should spawn this specific destruction bit
