@@ -1,0 +1,11 @@
+Model Information:
+* title:	Spinel's gem
+* source:	https://sketchfab.com/3d-models/spinels-gem-a8619c5c2f484422ae495440538a104c
+* author:	KloWorks (https://sketchfab.com/kloworks)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Spinel's gem" (https://sketchfab.com/3d-models/spinels-gem-a8619c5c2f484422ae495440538a104c) by KloWorks (https://sketchfab.com/kloworks) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
